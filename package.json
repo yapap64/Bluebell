@@ -1,9 +1,9 @@
 {
-  "name": "mi-musica",
+  "name": "bluebell",
   "version": "1.0.0",
-  "description": "Reproductor de música personal, sin anuncios",
+  "description": "A personal music player with no ads",
   "main": "electron/main.js",
-  "author": "Mi música",
+  "author": "Bluebell",
   "license": "MIT",
   "scripts": { "start": "electron ." },
   "dependencies": {
@@ -16,12 +16,12 @@
     "electron-builder": "^24.13.3"
   },
   "build": {
-    "appId": "app.mimusica.player",
-    "productName": "Mi música",
+    "appId": "app.bluebell.player",
+    "productName": "Bluebell",
     "files": ["electron/**", "www/**", "package.json"],
     "directories": { "output": "dist" },
     "win": { "target": ["nsis", "portable"], "icon": "build/icon.png" },
-    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "artifactName": "MiMusica-Instalador-${version}.${ext}" },
-    "portable": { "artifactName": "MiMusica-Portable-${version}.${ext}" }
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "artifactName": "Bluebell-Setup-${version}.${ext}" },
+    "portable": { "artifactName": "Bluebell-Portable-${version}.${ext}" }
   }
 }

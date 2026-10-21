@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mi música</title>
+<title>Bluebell</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#101126">
 <link rel="icon" href="icon.svg">
@@ -62,15 +62,21 @@ input[type=range]{flex:1;accent-color:var(--ac);height:24px;margin:0;min-width:0
 .vol{display:flex;justify-content:flex-end;align-items:center;gap:8px;color:var(--mu)}
 .vol input{max-width:120px}
 .ov{position:fixed;inset:0;background:rgba(0,0,0,.5);display:grid;align-items:end;justify-items:center;z-index:9}
-.sheet{background:var(--pn);width:min(420px,100%);border-radius:16px 16px 0 0;padding:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+.sheet{background:var(--pn);width:min(420px,100%);max-height:92vh;overflow:auto;border-radius:16px 16px 0 0;padding:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}
 .sheet p{margin:4px 12px 8px;font-weight:700}
-.set{display:grid;gap:18px;padding:8px 20px 20px;max-width:520px}.set label{display:grid;gap:6px;font-weight:600}.set select,.set input[type=color]{background:var(--pn2);color:var(--tx);border:0;border-radius:10px;padding:10px;font:inherit;height:42px}.sw{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.sw button{width:32px;height:32px;border-radius:50%;border:2px solid transparent}.sw button.on{border-color:var(--tx)}
+.set{display:grid;gap:18px;padding:8px 20px 20px;max-width:520px}.set label{display:grid;gap:6px;font-weight:600}.set select,.set input[type=color]{background:var(--pn2);color:var(--tx);border:0;border-radius:10px;padding:10px;font:inherit;height:42px}.sw{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.sw button:not(.btn){width:32px;height:32px;border-radius:50%;border:2px solid transparent}.sw .btn{white-space:nowrap;flex:none}.sw button.on{border-color:var(--tx)}
 .toast{position:fixed;left:50%;bottom:calc(130px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:999px;z-index:20;max-width:90vw;text-align:center}
 .set h2{margin:14px 0 0;font-size:15px;color:var(--mu);font-weight:600}
 .set label.tg{display:flex;align-items:center;gap:10px}.set input[type=checkbox]{width:20px;height:20px;accent-color:var(--ac)}
 .nocov .cov{display:none}.nocov .row{grid-template-columns:minmax(0,1fr) auto auto}.nodur .dur{display:none}
 #sb,#sf{display:none}.skip #sb,.skip #sf{display:block}
 @media (min-width:761px){html[data-sb="right"] .app{grid-template-columns:minmax(0,1fr) var(--sbw,232px);grid-template-areas:"main side" "bar bar"}}
+.tabs{display:flex;gap:6px;padding:0 20px 8px}.tb{padding:8px 16px;border-radius:999px;font-weight:600;color:var(--mu);background:var(--pn2)}.tb.on{background:var(--ac);color:var(--on)}
+.tcs,.th,.er{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.tc{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;font-weight:600;border:1px solid var(--pn2)}.tc i{width:14px;height:14px;border-radius:50%;flex:none}
+.ta{background:var(--pn2);color:var(--tx);border:0;border-radius:10px;padding:10px;font:inherit;width:100%;resize:vertical}.ta.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}pre.ta{white-space:pre-wrap;font-size:12px;margin:8px 0 0}
+.mu{color:var(--mu);margin:0}.set details{color:var(--mu);font-weight:400}
+.fld{display:grid;gap:6px;margin:10px 4px;font-weight:600;font-size:13px;color:var(--mu)}.fld input[type=text]{background:var(--pn2);color:var(--tx);border:0;border-radius:10px;padding:10px;font:inherit}.fld input[type=color]{width:48px;height:38px;border:0;background:none;padding:0}
+.side,.main,.bar{transition:background-color .5s}
 .mk{display:flex;gap:10px;padding:6px 20px 12px;flex-wrap:wrap}
 @media (max-width:760px){
 .app{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto auto;grid-template-areas:"main" "bar" "side";gap:6px;padding:6px}
@@ -88,56 +94,56 @@ input[type=range]{flex:1;accent-color:var(--ac);height:24px;margin:0;min-width:0
 <body>
 <div class="app">
   <nav class="side">
-    <div class="brand">Mi música</div>
-    <button class="nav" data-v="lib"><i data-ic="lib"></i><span>Biblioteca</span></button>
-    <button class="nav" data-v="liked"><i data-ic="heart"></i><span>Me gusta</span></button>
-    <button class="nav" data-v="lists"><i data-ic="list"></i><span>Listas</span></button>
-    <button class="nav" data-v="queue"><i data-ic="queue"></i><span>Cola</span></button>
-    <button class="nav" data-v="set"><i data-ic="gear"></i><span>Ajustes</span></button>
-    <div class="sub">Tus listas</div>
+    <div class="brand">Bluebell</div>
+    <button class="nav" data-v="lib"><i data-ic="lib"></i><span data-t="Library">Library</span></button>
+    <button class="nav" data-v="liked"><i data-ic="heart"></i><span data-t="Liked">Liked</span></button>
+    <button class="nav" data-v="lists"><i data-ic="list"></i><span data-t="Playlists">Playlists</span></button>
+    <button class="nav" data-v="queue"><i data-ic="queue"></i><span data-t="Queue">Queue</span></button>
+    <button class="nav" data-v="set"><i data-ic="gear"></i><span data-t="Settings">Settings</span></button>
+    <div class="sub" data-t="Your playlists">Your playlists</div>
     <div id="pls"></div>
   </nav>
   <main class="main">
     <div class="head">
       <h1 id="h"></h1>
-      <input class="search" id="srch" type="search" placeholder="Buscar en esta vista" aria-label="Buscar">
-      <button class="btn ghost" id="del" hidden>Eliminar lista</button>
-      <label class="btn" for="file" tabindex="0"><i data-ic="plus"></i>Añadir música</label>
+      <input class="search" id="srch" type="search" placeholder="Search this view" aria-label="Search" data-ta="placeholder:Search this view;aria-label:Search">
+      <button class="btn ghost" id="del" data-t="Delete playlist" hidden>Delete playlist</button>
+      <label class="btn" for="file" tabindex="0"><i data-ic="plus"></i><span data-t="Add music">Add music</span></label>
       <input id="file" type="file" accept="audio/*" multiple hidden>
     </div>
-    <p class="warn" id="warn" hidden>Este navegador no permite guardar canciones: se perderán al cerrar la página.</p>
+    <p class="warn" id="warn" data-t="This browser can't save songs: they will be lost when you close the page." hidden>This browser can't save songs: they will be lost when you close the page.</p>
     <div id="list"></div>
   </main>
   <footer class="bar">
     <div class="np" id="np"></div>
     <div class="ctl">
       <div class="btns">
-        <button id="sh" title="Aleatorio" aria-label="Aleatorio"></button>
-        <button id="sb" aria-label="Retroceder"></button>
-        <button id="pv" title="Anterior" aria-label="Anterior"></button>
-        <button id="pp" class="play" title="Reproducir o pausar" aria-label="Reproducir o pausar"></button>
-        <button id="nx" title="Siguiente" aria-label="Siguiente"></button>
-        <button id="sf" aria-label="Adelantar"></button>
-        <button id="rp" title="Repetir" aria-label="Repetir"></button>
+        <button id="sh" title="Shuffle" aria-label="Shuffle" data-ta="title:Shuffle;aria-label:Shuffle"></button>
+        <button id="sb" aria-label="Rewind" data-ta="aria-label:Rewind"></button>
+        <button id="pv" title="Previous" aria-label="Previous" data-ta="title:Previous;aria-label:Previous"></button>
+        <button id="pp" class="play" title="Play or pause" aria-label="Play or pause" data-ta="title:Play or pause;aria-label:Play or pause"></button>
+        <button id="nx" title="Next" aria-label="Next" data-ta="title:Next;aria-label:Next"></button>
+        <button id="sf" aria-label="Forward" data-ta="aria-label:Forward"></button>
+        <button id="rp" title="Repeat" aria-label="Repeat" data-ta="title:Repeat;aria-label:Repeat"></button>
       </div>
-      <div class="seek"><span id="tc">0:00</span><input id="seek" type="range" min="0" max="1000" value="0" aria-label="Posición"><span id="td">0:00</span></div>
+      <div class="seek"><span id="tc">0:00</span><input id="seek" type="range" min="0" max="1000" value="0" aria-label="Position" data-ta="aria-label:Position"><span id="td">0:00</span></div>
     </div>
-    <div class="vol"><i data-ic="vol"></i><input id="vol" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volumen"></div>
+    <div class="vol"><i data-ic="vol"></i><input id="vol" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume" data-ta="aria-label:Volume"></div>
   </footer>
 </div>
 <script>
 const IC={play:'M8 5v14l11-7z',pause:'M7 5h4v14H7zM13 5h4v14h-4z',prev:'M6 5h2v14H6zM20 5v14L9 12z',next:'M16 5h2v14h-2zM4 5v14l11-7z',
 shuf:'M16 4h4v4M4 20L20 4M20 16v4h-4M4 4l5 5M15 15l5 5',rep:'M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3',
 heart:'M12 21s-8-5.2-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 11-8 11z',plus:'M12 5v14M5 12h14',x:'M6 6l12 12M18 6L6 18',
-trash:'M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13',lib:'M4 4v16M9 4v16M14 6l5 14',list:'M4 6h16M4 12h16M4 18h10',queue:'M4 6h12M4 12h12M4 18h8M18 14v6l4-3z',vol:'M4 9v6h4l5 4V5L8 9zM17 8a5 5 0 010 8',back:'M3 12a9 9 0 109-9M3 4v5h5',fwd:'M21 12a9 9 0 11-9-9M21 4v5h-5',gear:'M12 8a4 4 0 100 8 4 4 0 000-8zM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2'};
+trash:'M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13',lib:'M4 4v16M9 4v16M14 6l5 14',list:'M4 6h16M4 12h16M4 18h10',queue:'M4 6h12M4 12h12M4 18h8M18 14v6l4-3z',vol:'M4 9v6h4l5 4V5L8 9zM17 8a5 5 0 010 8',back:'M3 12a9 9 0 109-9M3 4v5h5',fwd:'M21 12a9 9 0 11-9-9M21 4v5h-5',edit:'M4 20h4L19 9l-4-4L4 16zM14 6l4 4',gear:'M12 8a4 4 0 100 8 4 4 0 000-8zM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2'};
 const ic=(n,f)=>`<svg viewBox="0 0 24 24" class="ic" ${f?'fill="currentColor"':'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"'}><path d="${IC[n]}"/></svg>`;
 const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=s=>isFinite(s)&&s>0?Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'):'0:00';
 const uid=()=>(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2));
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
-const S={songs:[],pls:[],view:'lib',q:'',base:[],order:[],qi:-1,shuf:false,rep:0,vol:1,shown:[],ui:{}};
+const S={songs:[],pls:[],view:'lib',q:'',base:[],order:[],qi:-1,shuf:false,rep:0,vol:1,shown:[],ui:{},themes:[],tab:'gen',dynCol:null};
 const FF={outfit:'Outfit,system-ui,sans-serif',sys:'system-ui,-apple-system,"Segoe UI",Roboto,sans-serif',serif:'Georgia,"Times New Roman",serif',mono:'ui-monospace,Menlo,Consolas,monospace'};
-const UI0={theme:'system',ac:'',bg:'',pn:'',tx:'',ff:'outfit',r:14,den:6,fs:15,cov:'grad',cvs:44,cr:'8',sbp:'left',sbw:232,dur:true,skip:false,step:10,rem:false,auto:true,spd:1,pp:true,fin:0,fout:0,e0:0,e1:0,e2:0,e3:0,e4:0,boost:100,bal:0,mono:false};
+const UI0={theme:'system',ac:'',bg:'',pn:'',tx:'',ff:'outfit',r:14,den:6,fs:15,cov:'grad',cvs:44,cr:'8',sbp:'left',sbw:232,dur:true,skip:false,step:10,rem:false,auto:true,spd:1,pp:true,fin:0,fout:0,e0:0,e1:0,e2:0,e3:0,e4:0,boost:100,bal:0,mono:false,css:'',dyn:'off',dynw:'ac',lang:'en'};
 function applyUI(){const u=S.ui,r=document.documentElement;
   if(u.theme==='system')r.removeAttribute('data-theme');else r.dataset.theme=u.theme;
   if(u.ac){const n=parseInt(u.ac.slice(1),16),l=((n>>16)*299+(n>>8&255)*587+(n&255)*114)/1000;r.style.setProperty('--ac',u.ac);r.style.setProperty('--on',l>150?'#111':'#fff')}else{r.style.removeProperty('--ac');r.style.removeProperty('--on')}
@@ -146,31 +152,32 @@ function applyUI(){const u=S.ui,r=document.documentElement;
   r.dataset.sb=u.sbp;r.classList.toggle('nocov',u.cov==='none');r.classList.toggle('nodur',!u.dur);r.classList.toggle('skip',!!u.skip);
   [['bg','--bg'],['pn','--pn'],['tx','--tx']].forEach(([k,n])=>u[k]?r.style.setProperty(n,u[k]):r.style.removeProperty(n));
   if(u.pn)r.style.setProperty('--pn2','color-mix(in srgb,'+u.pn+' 88%,'+(u.tx||'#888')+')');else r.style.removeProperty('--pn2');
-  const b1=$('#sb');if(b1){b1.title='Retroceder '+u.step+' s';$('#sf').title='Adelantar '+u.step+' s'}r.style.setProperty('--r',u.r+'px');r.style.setProperty('--rp',u.den+'px');r.style.setProperty('--fs',u.fs+'px')}
+  const b1=$('#sb');if(b1){b1.title=TR('Rewind {n} s',{n:u.step});$('#sf').title=TR('Forward {n} s',{n:u.step})}r.style.setProperty('--r',u.r+'px');r.style.setProperty('--rp',u.den+'px');r.style.setProperty('--fs',u.fs+'px');
+  dynApply(r);userCss()}
 S.ui={...UI0};
 const A=new Audio();let db=null,url=null,drag=false;
 
 /* almacenamiento local (IndexedDB) */
 const dbop=(st,m,f)=>db?new Promise(r=>{try{const t=db.transaction(st,m);f(t.objectStore(st));t.oncomplete=()=>r(true);t.onerror=()=>r(false)}catch(e){r(false)}}):Promise.resolve(false);
-const saveP=()=>dbop('kv','readwrite',s=>s.put({pls:S.pls,vol:S.vol,shuf:S.shuf,rep:S.rep,ui:S.ui},'prefs'));
+const saveP=()=>dbop('kv','readwrite',s=>s.put({pls:S.pls,vol:S.vol,shuf:S.shuf,rep:S.rep,ui:S.ui,themes:S.themes},'prefs'));
 const saveS=s=>dbop('songs','readwrite',o=>o.put(s));
 async function init(){
   document.querySelectorAll('[data-ic]').forEach(e=>e.innerHTML=ic(e.dataset.ic));
   $('#sh').innerHTML=ic('shuf');$('#sb').innerHTML=ic('back');$('#sf').innerHTML=ic('fwd');$('#pv').innerHTML=ic('prev',1);$('#nx').innerHTML=ic('next',1);
   try{db=await new Promise((res,rej)=>{const q=indexedDB.open('mimusica',1);q.onupgradeneeded=()=>{q.result.createObjectStore('songs',{keyPath:'id'});q.result.createObjectStore('kv')};q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)})}catch(e){db=null;$('#warn').hidden=false}
-  if(db)await new Promise(r=>{try{const t=db.transaction(['songs','kv']);t.objectStore('songs').getAll().onsuccess=e=>{S.songs=e.target.result.sort((a,b)=>a.added-b.added)};t.objectStore('kv').get('prefs').onsuccess=e=>{const p=e.target.result;if(p)Object.assign(S,{pls:p.pls||[],vol:p.vol==null?1:p.vol,shuf:!!p.shuf,rep:p.rep||0,ui:{...UI0,...(p.ui||{})}})};t.oncomplete=r;t.onerror=r}catch(e){r()}});
-  A.volume=S.vol;applyUI();applyAudio();render();bar();
+  if(db)await new Promise(r=>{try{const t=db.transaction(['songs','kv']);t.objectStore('songs').getAll().onsuccess=e=>{S.songs=e.target.result.sort((a,b)=>a.added-b.added)};t.objectStore('kv').get('prefs').onsuccess=e=>{const p=e.target.result;if(p)Object.assign(S,{pls:p.pls||[],vol:p.vol==null?1:p.vol,shuf:!!p.shuf,rep:p.rep||0,ui:{...UI0,...(p.ui||{})},themes:p.themes||[]})};t.oncomplete=r;t.onerror=r}catch(e){r()}});
+  A.volume=S.vol;applyLang();applyUI();applyAudio();render();bar();
 }
 
 /* canciones */
 const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};
-const cov=s=>`<div class="cov" style="background:${S.ui.cov==='flat'?'var(--ac);color:var(--on)':`linear-gradient(135deg,hsl(${hue(s.title)} 65% 52%),hsl(${(hue(s.title)+60)%360} 65% 34%))`}">${esc([...s.title][0]||'♪')}</div>`;
+const cov=s=>{const st=s.img?`background:center/cover url(${s.img})`:s.col?`background:linear-gradient(135deg,${s.col},color-mix(in srgb,${s.col} 55%,#000))`:S.ui.cov==='flat'?'background:var(--ac);color:var(--on)':`background:linear-gradient(135deg,hsl(${hue(s.title)} 65% 52%),hsl(${(hue(s.title)+60)%360} 65% 34%))`;return `<div class="cov" style="${st}">${s.img?'':esc([...s.title][0]||'♪')}</div>`};
 const dur=f=>new Promise(r=>{const a=new Audio(),u=URL.createObjectURL(f);a.preload='metadata';a.onloadedmetadata=()=>{r(a.duration);URL.revokeObjectURL(u)};a.onerror=()=>{r(0);URL.revokeObjectURL(u)};a.src=u});
 async function add(files){
   for(const f of files){
     if(!/^audio\//.test(f.type)&&!/\.(mp3|m4a|flac|ogg|opus|wav|aac|webm)$/i.test(f.name))continue;
     const n=f.name.replace(/\.[^.]+$/,'').replace(/_/g,' ').trim(),m=n.split(' - ');
-    const s={id:uid(),title:m.length>1?m.slice(1).join(' - ').trim():n,artist:m.length>1?m[0].trim():'Artista desconocido',blob:f,dur:await dur(f),liked:false,added:Date.now()+S.songs.length};
+    const s={id:uid(),title:m.length>1?m.slice(1).join(' - ').trim():n,artist:m.length>1?m[0].trim():'Unknown artist',blob:f,dur:await dur(f),liked:false,added:Date.now()+S.songs.length};
     S.songs.push(s);await saveS(s);render();
   }
 }
@@ -188,7 +195,7 @@ function items(){
 function render(){
   const v=S.view,pl=v.startsWith('pl:')?S.pls.find(p=>p.id===v.slice(3)):null,c=cur();
   document.querySelectorAll('#pls [data-v],.side>[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
-  $('#h').textContent=pl?pl.name:({lib:'Tu biblioteca',liked:'Canciones que me gustan',lists:'Tus listas',queue:'Cola de reproducción',set:'Personalizar'}[v]||'');
+  $('#h').textContent=pl?pl.name:TR({lib:'Your library',liked:'Liked songs',lists:'Your playlists',queue:'Play queue',set:'Customize'}[v]||'');
   $('#del').hidden=!pl;$('#srch').hidden=v==='lists'||v==='set';
   $('#pls').innerHTML=S.pls.map(p=>`<button class="nav ${v==='pl:'+p.id?'on':''}" data-v="pl:${p.id}"><i>${ic('list')}</i><span>${esc(p.name)}</span></button>`).join('');
   const L=$('#list');
@@ -197,50 +204,53 @@ function render(){
       sel=(k,l)=>`<select data-ui="${k}">${Object.entries(l).map(([a,b])=>`<option value="${a}" ${String(u[k])===a?'selected':''}>${b}</option>`).join('')}</select>`,
       rng=(k,t,a,b,st,un)=>`<label><b>${t} <span>(${u[k]}${un})</span></b><input type="range" data-ui="${k}" data-un="${un}" min="${a}" max="${b}" step="${st}" value="${u[k]}"></label>`,
       tog=(k,t)=>`<label class="tg"><input type="checkbox" data-ui="${k}" ${u[k]?'checked':''}>${t}</label>`,
-      col=(k,t,d)=>`<label>${t}<span class="sw"><input type="color" data-ui="${k}" value="${u[k]||d}"><button class="btn ghost" data-ui="${k}" data-val="">Por defecto</button></span></label>`;
-    L.innerHTML=`<div class="set">`+h('Apariencia')+
-      `<label>Tema${sel('theme',{system:'Automático (el del dispositivo)',light:'Claro',dark:'Oscuro'})}</label>`+
-      `<label>Color de acento<span class="sw">${['#ffb454','#ff6b8b','#6ee7b7','#7aa2ff','#c084fc','#f87171'].map(c=>`<button data-ui="ac" data-val="${c}" class="${u.ac===c?'on':''}" style="background:${c}" aria-label="Acento ${c}"></button>`).join('')}<input type="color" data-ui="ac" value="${u.ac||'#ffb454'}" aria-label="Color propio"><button class="btn ghost" data-ui="ac" data-val="">Por defecto</button></span></label>`+
-      col('bg','Color de fondo','#101126')+col('pn','Color de las tarjetas','#191b38')+col('tx','Color del texto','#eceaf8')+
-      `<label>Tipografía${sel('ff',{outfit:'Outfit',sys:'Sistema',serif:'Con serifa',mono:'Monoespaciada'})}</label>`+
-      rng('fs','Tamaño del texto',13,22,1,'px')+rng('r','Redondeo de las tarjetas',0,28,1,'px')+
-      h('Lista y portadas')+`<label>Portadas${sel('cov',{grad:'Degradado de colores',flat:'Color de acento',none:'Ocultar'})}</label>`+
-      `<label>Forma de las portadas${sel('cr',{0:'Cuadradas',8:'Redondeadas',c:'Circulares'})}</label>`+
-      rng('cvs','Tamaño de las portadas',32,80,2,'px')+rng('den','Espacio entre canciones',2,18,1,'px')+tog('dur','Mostrar la duración en la lista')+
-      `<label>Barra lateral (en PC)${sel('sbp',{left:'A la izquierda',right:'A la derecha'})}</label>`+rng('sbw','Ancho de la barra lateral',180,320,4,'px')+
-      h('Reproductor')+tog('skip','Botones para saltar tiempo')+`<label>Cuánto saltar${sel('step',{5:'5 segundos',10:'10 segundos',15:'15 segundos',30:'30 segundos'})}</label>`+
-      tog('rem','Mostrar el tiempo que queda en vez del total')+tog('auto','Pasar a la siguiente canción automáticamente')+
-      rng('spd','Velocidad de reproducción',0.5,2,0.05,'x')+tog('pp','Mantener el tono al cambiar la velocidad')+
-      rng('fin','Fundido de entrada',0,10,1,' s')+rng('fout','Fundido de salida',0,10,1,' s')+
-      `<label>Temporizador de apagado<select data-sl="1">${[['0','Desactivado'],['15','En 15 minutos'],['30','En 30 minutos'],['45','En 45 minutos'],['60','En 1 hora'],['90','En 1 hora y media'],['end','Al terminar la canción']].map(([a,b])=>`<option value="${a}" ${(S.sleep||'0')===a?'selected':''}>${b}</option>`).join('')}</select></label>`+
-      h('Audio')+`<label>Ecualizador<select data-eqp="1"><option value="">Personalizado</option><option value="flat">Plano</option><option value="bass">Graves potentes</option><option value="voice">Voces</option><option value="treble">Agudos brillantes</option><option value="rock">Rock</option></select></label>`+
-      rng('e0','Graves (60 Hz)',-12,12,1,' dB')+rng('e1','Medios graves (230 Hz)',-12,12,1,' dB')+rng('e2','Medios (910 Hz)',-12,12,1,' dB')+rng('e3','Medios agudos (3,6 kHz)',-12,12,1,' dB')+rng('e4','Agudos (14 kHz)',-12,12,1,' dB')+
-      rng('boost','Volumen máximo',100,200,5,'%')+rng('bal','Balance izquierda y derecha',-1,1,0.1,'')+tog('mono','Audio mono')+
-      `<button class="btn ghost" id="rst">Restablecer todo</button></div>`;
+      col=(k,t,d)=>`<label>${t}<span class="sw"><input type="color" data-ui="${k}" value="${u[k]||d}"><button class="btn ghost" data-ui="${k}" data-val="">${TR('Default')}</button></span></label>`;
+    const tabs=`<div class="tabs"><button class="tb ${S.tab==='theme'?'':'on'}" data-tab="gen">${TR('General')}</button><button class="tb ${S.tab==='theme'?'on':''}" data-tab="theme">${TR('Themes')}</button></div>`;
+    if(S.tab==='theme'){L.innerHTML=tabs+themesHTML();return}
+    L.innerHTML=tabs+`<div class="set"><label>Language / Idioma${sel('lang',{en:'English',es:'Español',gl:'Galego',pt:'Português'})}</label>`+h(TR('Appearance'))+
+      `<label>${TR('Theme')}${sel('theme',{system:TR('Automatic (device default)'),light:TR('Light'),dark:TR('Dark')})}</label>`+
+      `<label>${TR('Accent color')}<span class="sw">${['#ffb454','#ff6b8b','#6ee7b7','#7aa2ff','#c084fc','#f87171'].map(c=>`<button data-ui="ac" data-val="${c}" class="${u.ac===c?'on':''}" style="background:${c}" aria-label="${c}"></button>`).join('')}<input type="color" data-ui="ac" value="${u.ac||'#ffb454'}" aria-label="${TR('Custom color')}"><button class="btn ghost" data-ui="ac" data-val="">${TR('Default')}</button></span></label>`+
+      col('bg',TR('Background color'),'#101126')+col('pn',TR('Card color'),'#191b38')+col('tx',TR('Text color'),'#eceaf8')+
+      `<label>${TR('Typeface')}${sel('ff',{outfit:'Outfit',sys:TR('System'),serif:TR('Serif'),mono:TR('Monospace')})}</label>`+
+      rng('fs',TR('Text size'),13,22,1,'px')+rng('r',TR('Card roundness'),0,28,1,'px')+
+      h(TR('Color by song'))+`<label>${TR('Change colors by song')}${sel('dyn',{off:TR("Don't change"),song:TR('Song color (or its image color)'),img:TR('Image colors only')})}</label>`+`<label>${TR('What to color')}${sel('dynw',{ac:TR('Accent only'),full:TR('Accent and backgrounds')})}</label>`+
+      h(TR('Lists and covers'))+`<label>${TR('Covers')}${sel('cov',{grad:TR('Color gradient'),flat:TR('Accent color'),none:TR('Hide')})}</label>`+
+      `<label>${TR('Cover shape')}${sel('cr',{0:TR('Square'),8:TR('Rounded'),c:TR('Circular')})}</label>`+
+      rng('cvs',TR('Cover size'),32,80,2,'px')+rng('den',TR('Spacing between songs'),2,18,1,'px')+tog('dur',TR('Show duration in the list'))+
+      `<label>${TR('Sidebar (on PC)')}${sel('sbp',{left:TR('On the left'),right:TR('On the right')})}</label>`+rng('sbw',TR('Sidebar width'),180,320,4,'px')+
+      h(TR('Player'))+tog('skip',TR('Skip-time buttons'))+`<label>${TR('How much to skip')}${sel('step',{5:TR('{n} seconds',{n:5}),10:TR('{n} seconds',{n:10}),15:TR('{n} seconds',{n:15}),30:TR('{n} seconds',{n:30})})}</label>`+
+      tog('rem',TR('Show remaining time instead of total'))+tog('auto',TR('Play the next song automatically'))+
+      rng('spd',TR('Playback speed'),0.5,2,0.05,'x')+tog('pp',TR('Keep pitch when changing speed'))+
+      rng('fin',TR('Fade in'),0,10,1,' s')+rng('fout',TR('Fade out'),0,10,1,' s')+
+      `<label>${TR('Sleep timer')}<select data-sl="1">${[['0',TR('Off')],['15',TR('In {n} minutes',{n:15})],['30',TR('In {n} minutes',{n:30})],['45',TR('In {n} minutes',{n:45})],['60',TR('In 1 hour')],['90',TR('In 1.5 hours')],['end',TR('When the song ends')]].map(([a,b])=>`<option value="${a}" ${(S.sleep||'0')===a?'selected':''}>${b}</option>`).join('')}</select></label>`+
+      h(TR('Audio'))+`<label>${TR('Equalizer')}<select data-eqp="1"><option value="">${TR('Custom')}</option><option value="flat">${TR('Flat')}</option><option value="bass">${TR('Strong bass')}</option><option value="voice">${TR('Vocals')}</option><option value="treble">${TR('Bright treble')}</option><option value="rock">Rock</option></select></label>`+
+      rng('e0',TR('Bass (60 Hz)'),-12,12,1,' dB')+rng('e1',TR('Low mids (230 Hz)'),-12,12,1,' dB')+rng('e2',TR('Mids (910 Hz)'),-12,12,1,' dB')+rng('e3',TR('High mids (3.6 kHz)'),-12,12,1,' dB')+rng('e4',TR('Treble (14 kHz)'),-12,12,1,' dB')+
+      rng('boost',TR('Maximum volume'),100,200,5,'%')+rng('bal',TR('Left/right balance'),-1,1,0.1,'')+tog('mono',TR('Mono audio'))+
+      `<button class="btn ghost" id="rst">${TR('Reset everything')}</button></div>`;
     return;
   }
   if(v==='lists'){
-    L.innerHTML=`<div class="mk"><input class="txt" id="pn" placeholder="Nombre de la lista" maxlength="40"><button class="btn" id="pc">Crear lista</button></div>`+
-      (S.pls.length?S.pls.map(p=>`<div class="row" data-v="pl:${p.id}"><div class="cov" style="background:var(--pn2);color:var(--mu)">${ic('list')}</div><div class="t"><b>${esc(p.name)}</b><span>${p.ids.length} canciones</span></div><span></span></div>`).join(''):`<div class="empty">Crea una lista y añade canciones con el botón + de cada fila.</div>`);
+    L.innerHTML=`<div class="mk"><input class="txt" id="pn" placeholder="${TR('Playlist name')}" maxlength="40"><button class="btn" id="pc">${TR('Create playlist')}</button></div>`+
+      (S.pls.length?S.pls.map(p=>`<div class="row" data-v="pl:${p.id}"><div class="cov" style="background:var(--pn2);color:var(--mu)">${ic('list')}</div><div class="t"><b>${esc(p.name)}</b><span>${TR('{n} songs',{n:p.ids.length})}</span></div><span></span></div>`).join(''):`<div class="empty">${TR('Create a playlist and add songs with the + button on each row.')}</div>`);
     return;
   }
   const l=S.shown=items();
   if(!l.length){
-    L.innerHTML=`<div class="empty">${S.q?'Sin resultados para “'+esc(S.q)+'”.':({lib:'Aún no tienes canciones. Pulsa “Añadir música” y elige archivos MP3, M4A, FLAC u OGG de tu dispositivo.',liked:'Marca canciones con el corazón y aparecerán aquí.',queue:'La cola está vacía. Reproduce una canción para llenarla.'}[v]||'Esta lista está vacía. Añade canciones con el botón + de la biblioteca.')}</div>`;
+    L.innerHTML=`<div class="empty">${S.q?TR('No results for “{q}”.',{q:esc(S.q)}):TR({lib:'You have no songs yet. Tap “Add music” and choose MP3, M4A, FLAC or OGG files from your device.',liked:'Mark songs with the heart and they will appear here.',queue:'The queue is empty. Play a song to fill it.'}[v]||'This playlist is empty. Add songs with the + button in the library.')}</div>`;
     return;
   }
-  L.innerHTML=l.map((s,i)=>`<div class="row ${c&&c.id===s.id?'cur':''}" data-i="${i}">${cov(s)}<div class="t"><b>${esc(s.title)}</b><span>${esc(s.artist)}</span></div><span class="dur">${fmt(s.dur)}</span><div class="act"><button data-a="like" class="${s.liked?'on':''}" title="Me gusta" aria-label="Me gusta">${ic('heart',s.liked)}</button><button data-a="add" title="Añadir a una lista" aria-label="Añadir a una lista">${ic('plus')}</button><button data-a="rm" title="${pl?'Quitar de la lista':'Eliminar de la biblioteca'}" aria-label="${pl?'Quitar de la lista':'Eliminar'}">${ic(pl?'x':'trash')}</button></div></div>`).join('');
+  L.innerHTML=l.map((s,i)=>`<div class="row ${c&&c.id===s.id?'cur':''}" data-i="${i}">${cov(s)}<div class="t"><b>${esc(s.title)}</b><span>${esc(art(s))}</span></div><span class="dur">${fmt(s.dur)}</span><div class="act"><button data-a="like" class="${s.liked?'on':''}" title="${TR('Like')}" aria-label="${TR('Like')}">${ic('heart',s.liked)}</button><button data-a="edit" title="${TR('Edit song')}" aria-label="${TR('Edit song')}">${ic('edit')}</button><button data-a="add" title="${TR('Add to a playlist')}" aria-label="${TR('Add to a playlist')}">${ic('plus')}</button><button data-a="rm" title="${TR(pl?'Remove from playlist':'Remove from library')}" aria-label="${TR(pl?'Remove from playlist':'Remove')}">${ic(pl?'x':'trash')}</button></div></div>`).join('');
 }
 function bar(){
   const s=cur();
-  $('#np').innerHTML=s?`${cov(s)}<div class="t"><b>${esc(s.title)}</b><span>${esc(s.artist)}</span></div><button data-a="likeNow" class="${s.liked?'on':''}" aria-label="Me gusta">${ic('heart',s.liked)}</button>`:`<div class="t"><span>Elige una canción para empezar</span></div>`;
+  $('#np').innerHTML=s?`${cov(s)}<div class="t"><b>${esc(s.title)}</b><span>${esc(art(s))}</span></div><button data-a="likeNow" class="${s.liked?'on':''}" aria-label="${TR('Like')}">${ic('heart',s.liked)}</button>`:`<div class="t"><span>${TR('Pick a song to start')}</span></div>`;
   $('#pp').innerHTML=ic(A.paused||!s?'play':'pause',1);
   $('#sh').classList.toggle('on',S.shuf);$('#rp').classList.toggle('on',S.rep>0);
   $('#rp').innerHTML=ic('rep')+(S.rep===2?'<i class="one">1</i>':'');$('#vol').value=S.vol;
 }
 function sheet(t,its){
   const o=document.createElement('div');o.className='ov';
-  o.innerHTML=`<div class="sheet"><p>${esc(t)}</p>${its.map((x,i)=>`<button class="nav ${x.bad?'bad':''}" data-k="${i}">${esc(x.label)}</button>`).join('')}<button class="nav" data-k="c">Cancelar</button></div>`;
+  o.innerHTML=`<div class="sheet"><p>${esc(t)}</p>${its.map((x,i)=>`<button class="nav ${x.bad?'bad':''}" data-k="${i}">${esc(x.label)}</button>`).join('')}<button class="nav" data-k="c">${TR('Cancel')}</button></div>`;
   o.onclick=e=>{const b=e.target.closest('[data-k]');if(!b&&e.target!==o)return;o.remove();if(b&&b.dataset.k!=='c')its[b.dataset.k].fn()};
   document.body.append(o);
 }
@@ -253,8 +263,8 @@ function play(l,i){
 function load(){
   const s=cur();if(!s)return;
   if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(s.blob);audioInit();if(ctx&&ctx.state==='suspended')ctx.resume();A.src=url;A.play().catch(()=>{});fadeIn();
-  if('mediaSession' in navigator)navigator.mediaSession.metadata=new MediaMetadata({title:s.title,artist:s.artist});
-  bar();render();
+  if('mediaSession' in navigator)navigator.mediaSession.metadata=new MediaMetadata({title:s.title,artist:s.artist,artwork:s.img?[{src:s.img,sizes:'256x256',type:'image/jpeg'}]:[]});
+  bar();render();dynUpdate();
 }
 function next(auto){
   if(!S.order.length)return;
@@ -282,7 +292,7 @@ function remove(s){
   S.songs=S.songs.filter(x=>x!==s);S.pls.forEach(p=>p.ids=p.ids.filter(i=>i!==s.id));
   S.base=S.base.filter(i=>i!==s.id);S.order=S.order.filter(i=>i!==s.id);
   if(wasCur){A.pause();A.removeAttribute('src');S.order=[];S.base=[];S.qi=-1}else S.qi=S.order.indexOf(id);
-  dbop('songs','readwrite',o=>o.delete(s.id));saveP();bar();render();
+  dbop('songs','readwrite',o=>o.delete(s.id));saveP();bar();render();dynUpdate();
 }
 A.onplay=A.onpause=bar;
 A.onended=()=>{if(slEnd){slEnd=false;S.sleep='0';bar();return}if(S.rep===2){A.currentTime=0;A.play()}else if(S.ui.auto===false)bar();else next(true)};
@@ -323,12 +333,270 @@ function fadeTick(){
 }
 function setSleep(v){
   clearTimeout(slT);slEnd=v==='end';S.sleep=v;if(+v>0)slT=setTimeout(sleepNow,v*60000);
-  toast(v==='0'?'Temporizador desactivado':slEnd?'Se detendrá al terminar la canción':'Se detendrá en '+v+' minutos');
+  toast(v==='0'?TR('Timer off'):slEnd?TR('It will stop when the song ends'):TR('It will stop in {n} minutes',{n:v}));
 }
 function sleepNow(){
   S.sleep='0';slEnd=false;
   const done=()=>{A.pause();if(nodes)nodes.fade.gain.setValueAtTime(1,ctx.currentTime);if(S.view==='set')render()};
   if(nodes&&!A.paused){const g=nodes.fade.gain,t=ctx.currentTime;g.cancelScheduledValues(t);g.setValueAtTime(g.value,t);g.linearRampToValueAtTime(0,t+4);setTimeout(done,4200)}else done();
+}
+
+/* color según la canción */
+const hslOf=h=>{const n=parseInt(h.slice(1),16);let[r,g,b]=[n>>16,n>>8&255,n&255].map(x=>x/255);const M=Math.max(r,g,b),m=Math.min(r,g,b),d=M-m;let H=0;if(d){H=M===r?((g-b)/d)%6:M===g?(b-r)/d+2:(r-g)/d+4;H=Math.round(H*60);if(H<0)H+=360}const L=(M+m)/2;return[H,Math.round((d?d/(1-Math.abs(2*L-1)):0)*100),Math.round(L*100)]};
+const isDark=()=>S.ui.theme==='dark'||(S.ui.theme==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);
+const imgColor=src=>new Promise(res=>{const im=new Image();im.onload=()=>{try{const c=document.createElement('canvas');c.width=c.height=32;const x=c.getContext('2d');x.drawImage(im,0,0,32,32);const d=x.getImageData(0,0,32,32).data,B=Array.from({length:24},()=>({w:0,s:0}));
+  for(let i=0;i<d.length;i+=4){const[h,sa,l]=hslOf('#'+[d[i],d[i+1],d[i+2]].map(v=>v.toString(16).padStart(2,'0')).join(''));const w=(sa/100)*(1-Math.abs(l-50)/50),b=B[Math.floor(h/15)%24];b.w+=w;b.s+=sa*w}
+  let k=0;B.forEach((b,i)=>{if(b.w>B[k].w)k=i});res(B[k].w>.5?{h:k*15+7,s:Math.round(B[k].s/B[k].w)}:null)}catch(e){res(null)}};im.onerror=()=>res(null);im.src=src});
+function dynApply(r){
+  const c=S.dynCol;if(!c||S.ui.dyn==='off')return;const dk=isDark(),sa=Math.max(c.s,45),la=dk?70:38;
+  r.style.setProperty('--ac',`hsl(${c.h} ${sa}% ${la}%)`);r.style.setProperty('--on',dk?'#111':'#fff');
+  if(S.ui.dynw==='full'){const f=Math.min(60,Math.max(25,c.s));
+    r.style.setProperty('--bg',`hsl(${c.h} ${f*.6}% ${dk?7:95}%)`);r.style.setProperty('--pn',`hsl(${c.h} ${f*.5}% ${dk?12:99}%)`);r.style.setProperty('--pn2',`hsl(${c.h} ${f*.5}% ${dk?19:91}%)`)}
+}
+async function dynUpdate(){
+  const m=S.ui.dyn,s=cur();let c=null;
+  if(m!=='off'&&s){if(m==='song'&&s.col){const[h,sa]=hslOf(s.col);c={h,s:sa}}else if(s.img)c=await imgColor(s.img);if(!c&&m==='song')c={h:hue(s.title),s:65}}
+  if(cur()!==s)return;S.dynCol=c;applyUI();
+}
+/* temas */
+const cssSafe=c=>String(c).replace(/@import[^;]*;?/gi,'').replace(/url\(\s*['"]?(?!data:)[^)]*\)/gi,'none').slice(0,20000);
+function userCss(){let t=document.getElementById('usercss');if(!t){t=document.createElement('style');t.id='usercss';document.head.append(t)}t.textContent=cssSafe(S.ui.css||'')}
+const THK=['theme','ac','bg','pn','tx','ff','fs','r','cov','cr','cvs','den','sbp','sbw','dur'],RG={fs:[13,22],r:[0,28],cvs:[32,80],den:[2,18],sbw:[180,320]};
+const PRE=[{n:'Midnight',u:{theme:'dark',bg:'#0b0c1a',pn:'#14162d',tx:'#e8e9ff',ac:'#7aa2ff'}},{n:'Ocean',u:{theme:'dark',bg:'#06202b',pn:'#0c2f3f',tx:'#e6f6ff',ac:'#37d0e6'}},{n:'Forest',u:{theme:'dark',bg:'#0d1a12',pn:'#15271b',tx:'#e9f5ec',ac:'#6ee7b7'}},{n:'Sunset',u:{theme:'dark',bg:'#1f0f1b',pn:'#2e1727',tx:'#fff0e8',ac:'#ff8a5c'}},{n:'Paper',u:{theme:'light',bg:'#efe9dd',pn:'#faf6ec',tx:'#2b2620',ac:'#b4541a'}},{n:'High contrast',u:{theme:'dark',bg:'#000000',pn:'#000000',tx:'#ffffff',ac:'#ffe600'}},{n:'Neon',u:{theme:'dark',bg:'#0a0014',pn:'#16002b',tx:'#f5e9ff',ac:'#ff3df2'}}];
+function setTheme(t){THK.forEach(k=>S.ui[k]=(t.u&&k in t.u)?t.u[k]:UI0[k]);S.ui.css=t.c||'';applyUI();saveP();render();toast(TR('Theme applied'))}
+const exportT=t=>'MM1:'+btoa(unescape(encodeURIComponent(JSON.stringify({n:t.n,u:t.u,c:t.c||''}))));
+function importT(code){
+  try{const j=JSON.parse(decodeURIComponent(escape(atob(code.trim().replace(/^MM1:/,'')))));const u={};
+    for(const k of THK){if(!j.u||!(k in j.u))continue;const v=j.u[k];if(typeof v!==typeof UI0[k])continue;
+      if(['ac','bg','pn','tx'].includes(k)){if(v===''||/^#[0-9a-f]{6}$/i.test(v))u[k]=v}
+      else if(k==='theme'){if(['system','light','dark'].includes(v))u[k]=v}
+      else if(k==='ff'){if(FF[v])u[k]=v}
+      else if(k==='cov'){if(['grad','flat','none'].includes(v))u[k]=v}
+      else if(k==='cr'){if(['0','8','c'].includes(v))u[k]=v}
+      else if(k==='sbp'){if(['left','right'].includes(v))u[k]=v}
+      else if(typeof v==='number'){if(isFinite(v)){const[a,b]=RG[k]||[0,1];u[k]=Math.min(b,Math.max(a,v))}}
+      else if(typeof v==='boolean')u[k]=v}
+    S.themes.push({id:uid(),n:String(j.n||'Tema importado').slice(0,40),u,c:cssSafe(j.c||'')});saveP();toast(TR('Theme imported'));render();
+  }catch(e){toast(TR('That code is not valid'))}
+}
+function themeAct(a){
+  const[k,id]=a.split(':'),t=S.themes.find(x=>x.id===id);
+  if(k==='p')setTheme({u:PRE[+id].u,c:''});
+  else if(k==='u'&&t)setTheme(t);
+  else if(k==='x'&&t){S.out=exportT(t);if(navigator.clipboard)navigator.clipboard.writeText(S.out).then(()=>toast(TR('Code copied')),()=>{});render()}
+  else if(k==='d'&&t)sheet(TR('Delete the theme “{n}”?',{n:t.n}),[{label:TR('Delete'),bad:1,fn:()=>{S.themes=S.themes.filter(x=>x!==t);saveP();render()}}]);
+  else if(k==='save'){const n=($('#tn').value||'').trim();if(!n){toast(TR('Name your theme'));return}const u={};THK.forEach(q=>u[q]=S.ui[q]);S.themes.push({id:uid(),n:n.slice(0,40),u,c:S.ui.css||''});saveP();toast(TR('Theme saved'));render()}
+  else if(k==='imp')importT($('#ti').value);
+  else if(k==='rcss'){S.ui.css='';userCss();saveP();render()}
+}
+function themesHTML(){
+  const card=(a,n,x)=>`<button class="tc" data-th="${a}" style="background:${x.bg||'var(--pn2)'};color:${x.tx||'var(--tx)'}"><i style="background:${x.ac||'var(--ac)'}"></i>${esc(n)}</button>`;
+  return `<div class="set"><h2>${TR('Ready-made themes')}</h2><div class="tcs">${PRE.map((p,i)=>card('p:'+i,TR(p.n),p.u)).join('')}</div>
+<h2>${TR('My themes')}</h2>${S.themes.length?S.themes.map(t=>`<div class="th">${card('u:'+t.id,t.n,t.u)}<button class="btn ghost" data-th="x:${t.id}">${TR('Share')}</button><button class="btn ghost" data-th="d:${t.id}">${TR('Delete')}</button></div>`).join(''):`<p class="mu">${TR("You haven't saved any themes yet.")}</p>`}
+<label>${TR('Save the current look as a theme')}<span class="sw"><input type="text" id="tn" class="txt" placeholder="${TR('Theme name')}" maxlength="40"><button class="btn" data-th="save">${TR('Save')}</button></span></label>
+${S.out?`<label>${TR('Code to share')}<textarea class="ta" readonly rows="3" onclick="this.select()">${esc(S.out)}</textarea></label>`:''}
+<label>${TR('Import a theme')}<textarea class="ta" id="ti" rows="3" placeholder="${TR('Paste a theme code here (starts with MM1:)')}"></textarea></label><button class="btn ghost" data-th="imp">${TR('Import')}</button>
+<h2>${TR('Advanced editor (CSS)')}</h2><p class="mu">${TR('Write CSS to change anything you want. It applies instantly and is saved with the theme.')}</p>
+<textarea class="ta code" data-css="1" rows="10" spellcheck="false" placeholder=".bar{border:1px solid var(--ac)}">${esc(S.ui.css||'')}</textarea><button class="btn ghost" data-th="rcss">${TR('Clear the CSS')}</button>
+<details><summary>${TR('Variables and classes available')}</summary><pre class="ta">${TR('Variables: --bg (background), --pn (cards), --pn2 (secondary cards), --tx (text), --mu (muted text), --ac (accent), --on (text on the accent), --r (roundness), --cv (cover size), --cr (cover shape), --ff (typeface), --fs (text size), --rp (spacing between songs).')}\n${TR('Classes: .side (sidebar), .main (central area), .bar (player), .head (header), .row (song), .cov (cover), .btn (buttons), .nav (menu), .t (title and artist), .play (play button).')}</pre></details></div>`;
+}
+/* editar canción */
+const readImg=f=>new Promise(res=>{const u=URL.createObjectURL(f),im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=256;const m=Math.min(im.width,im.height);c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,256,256);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.85))};im.onerror=()=>{URL.revokeObjectURL(u);res('')};im.src=u});
+function editSong(s){
+  let img=s.img||'',col=s.col||'';const o=document.createElement('div');o.className='ov';
+  o.innerHTML=`<div class="sheet"><p>${TR('Edit song')}</p>
+<label class="fld">${TR('Name')}<input type="text" id="e1" maxlength="120" value="${esc(s.title)}"></label>
+<label class="fld">${TR('Artist')}<input type="text" id="e2" maxlength="120" value="${esc(art(s))}"></label>
+<div class="fld">${TR('Image')}<div class="er"><span id="ep"></span><label class="btn ghost" for="ef">${TR('Choose image')}</label><input type="file" id="ef" accept="image/*" hidden><button class="btn ghost" id="ex">${TR('Remove image')}</button></div></div>
+<div class="fld">${TR('Song color')}<div class="er"><input type="color" id="ec" value="${col||'#ffb454'}"><button class="btn ghost" id="ea">${TR('Automatic')}</button><span id="et"></span></div></div>
+<button class="nav" id="es">${TR('Save')}</button><button class="nav" id="eq">${TR('Cancel')}</button></div>`;
+  const q=i=>o.querySelector(i),pv=()=>{q('#ep').innerHTML=cov({title:q('#e1').value||s.title,img,col});q('#et').textContent=col?TR('Custom color'):TR('Automatic')};
+  q('#ef').onchange=async e=>{const f=e.target.files[0];if(f){img=await readImg(f);pv()}};
+  q('#ex').onclick=()=>{img='';pv()};q('#ec').oninput=e=>{col=e.target.value;pv()};q('#ea').onclick=()=>{col='';pv()};q('#e1').oninput=pv;
+  q('#eq').onclick=()=>o.remove();o.onclick=e=>{if(e.target===o)o.remove()};
+  q('#es').onclick=()=>{
+    s.title=q('#e1').value.trim()||s.title;s.artist=q('#e2').value.trim()||'Unknown artist';
+    if(img)s.img=img;else delete s.img;if(col)s.col=col;else delete s.col;
+    saveS(s);o.remove();render();bar();
+    if(cur()&&cur().id===s.id){if('mediaSession' in navigator)navigator.mediaSession.metadata=new MediaMetadata({title:s.title,artist:s.artist,artwork:s.img?[{src:s.img,sizes:'256x256',type:'image/jpeg'}]:[]});dynUpdate()}
+  };
+  pv();document.body.append(o);
+}
+
+/* idiomas: la clave es el texto en inglés (idioma por defecto) */
+const TB=[
+["Library","Biblioteca","Biblioteca","Biblioteca"],
+["Liked","Me gusta","Gústame","Gosto"],
+["Playlists","Listas","Listas","Listas"],
+["Queue","Cola","Cola","Fila"],
+["Settings","Ajustes","Axustes","Definições"],
+["Your playlists","Tus listas","As túas listas","As tuas listas"],
+["Search this view","Buscar en esta vista","Buscar nesta vista","Pesquisar nesta vista"],
+["Search","Buscar","Buscar","Pesquisar"],
+["Delete playlist","Eliminar lista","Eliminar lista","Eliminar lista"],
+["Add music","Añadir música","Engadir música","Adicionar música"],
+["This browser can't save songs: they will be lost when you close the page.","Este navegador no permite guardar canciones: se perderán al cerrar la página.","Este navegador non permite gardar cancións: perderanse ao pechar a páxina.","Este navegador não permite guardar músicas: perder-se-ão ao fechar a página."],
+["Shuffle","Aleatorio","Aleatorio","Aleatório"],
+["Rewind","Retroceder","Retroceder","Recuar"],
+["Previous","Anterior","Anterior","Anterior"],
+["Play or pause","Reproducir o pausar","Reproducir ou pausar","Reproduzir ou pausar"],
+["Next","Siguiente","Seguinte","Seguinte"],
+["Forward","Adelantar","Avanzar","Avançar"],
+["Repeat","Repetir","Repetir","Repetir"],
+["Position","Posición","Posición","Posição"],
+["Volume","Volumen","Volume","Volume"],
+["Rewind {n} s","Retroceder {n} s","Retroceder {n} s","Recuar {n} s"],
+["Forward {n} s","Adelantar {n} s","Avanzar {n} s","Avançar {n} s"],
+["Your library","Tu biblioteca","A túa biblioteca","A tua biblioteca"],
+["Liked songs","Canciones que me gustan","Cancións que me gustan","Músicas de que gosto"],
+["Play queue","Cola de reproducción","Cola de reprodución","Fila de reprodução"],
+["Customize","Personalizar","Personalizar","Personalizar"],
+["General","General","Xeral","Geral"],
+["Themes","Temas","Temas","Temas"],
+["Appearance","Apariencia","Aspecto","Aparência"],
+["Theme","Tema","Tema","Tema"],
+["Automatic (device default)","Automático (el del dispositivo)","Automático (o do dispositivo)","Automático (o do dispositivo)"],
+["Light","Claro","Claro","Claro"],
+["Dark","Oscuro","Escuro","Escuro"],
+["Accent color","Color de acento","Cor de realce","Cor de destaque"],
+["Default","Por defecto","Por defecto","Predefinido"],
+["Custom color","Color propio","Cor propia","Cor própria"],
+["Background color","Color de fondo","Cor de fondo","Cor de fundo"],
+["Card color","Color de las tarjetas","Cor das tarxetas","Cor dos cartões"],
+["Text color","Color del texto","Cor do texto","Cor do texto"],
+["Typeface","Tipografía","Tipografía","Tipo de letra"],
+["System","Sistema","Sistema","Sistema"],
+["Serif","Con serifa","Con serifa","Com serifa"],
+["Monospace","Monoespaciada","Monoespaciada","Monoespaçada"],
+["Text size","Tamaño del texto","Tamaño do texto","Tamanho do texto"],
+["Card roundness","Redondeo de las tarjetas","Redondeo das tarxetas","Arredondamento dos cartões"],
+["Color by song","Color según la canción","Cor segundo a canción","Cor conforme a música"],
+["Change colors by song","Cambiar los colores según la canción","Cambiar as cores segundo a canción","Mudar as cores conforme a música"],
+["Don't change","No cambiar","Non cambiar","Não mudar"],
+["Song color (or its image color)","Color de la canción (o el de su imagen)","Cor da canción (ou a da súa imaxe)","Cor da música (ou a da sua imagem)"],
+["Image colors only","Solo colores de la imagen","Só cores da imaxe","Só cores da imagem"],
+["What to color","Qué colorear","Que colorear","O que colorir"],
+["Accent only","Solo el acento","Só o realce","Só o destaque"],
+["Accent and backgrounds","Acento y fondos","Realce e fondos","Destaque e fundos"],
+["Lists and covers","Lista y portadas","Lista e cubertas","Lista e capas"],
+["Covers","Portadas","Cubertas","Capas"],
+["Color gradient","Degradado de colores","Degradado de cores","Gradiente de cores"],
+["Hide","Ocultar","Ocultar","Ocultar"],
+["Cover shape","Forma de las portadas","Forma das cubertas","Forma das capas"],
+["Square","Cuadradas","Cadradas","Quadradas"],
+["Rounded","Redondeadas","Redondeadas","Arredondadas"],
+["Circular","Circulares","Circulares","Circulares"],
+["Cover size","Tamaño de las portadas","Tamaño das cubertas","Tamanho das capas"],
+["Spacing between songs","Espacio entre canciones","Espazo entre cancións","Espaço entre músicas"],
+["Show duration in the list","Mostrar la duración en la lista","Amosar a duración na lista","Mostrar a duração na lista"],
+["Sidebar (on PC)","Barra lateral (en PC)","Barra lateral (no PC)","Barra lateral (no PC)"],
+["On the left","A la izquierda","Á esquerda","À esquerda"],
+["On the right","A la derecha","Á dereita","À direita"],
+["Sidebar width","Ancho de la barra lateral","Largo da barra lateral","Largura da barra lateral"],
+["Player","Reproductor","Reprodutor","Reprodutor"],
+["Skip-time buttons","Botones para saltar tiempo","Botóns para saltar tempo","Botões para saltar tempo"],
+["How much to skip","Cuánto saltar","Canto saltar","Quanto saltar"],
+["{n} seconds","{n} segundos","{n} segundos","{n} segundos"],
+["Show remaining time instead of total","Mostrar el tiempo que queda en vez del total","Amosar o tempo restante en vez do total","Mostrar o tempo restante em vez do total"],
+["Play the next song automatically","Pasar a la siguiente canción automáticamente","Pasar á seguinte canción automaticamente","Passar à música seguinte automaticamente"],
+["Playback speed","Velocidad de reproducción","Velocidade de reprodución","Velocidade de reprodução"],
+["Keep pitch when changing speed","Mantener el tono al cambiar la velocidad","Manter o ton ao cambiar a velocidade","Manter o tom ao mudar a velocidade"],
+["Fade in","Fundido de entrada","Fundido de entrada","Fade de entrada"],
+["Fade out","Fundido de salida","Fundido de saída","Fade de saída"],
+["Sleep timer","Temporizador de apagado","Temporizador de apagado","Temporizador de desligar"],
+["Off","Desactivado","Desactivado","Desativado"],
+["In {n} minutes","En {n} minutos","En {n} minutos","Em {n} minutos"],
+["In 1 hour","En 1 hora","Nunha hora","Em 1 hora"],
+["In 1.5 hours","En 1 hora y media","Nunha hora e media","Em 1 hora e meia"],
+["When the song ends","Al terminar la canción","Ao rematar a canción","Ao terminar a música"],
+["Audio","Audio","Audio","Áudio"],
+["Equalizer","Ecualizador","Ecualizador","Equalizador"],
+["Custom","Personalizado","Personalizado","Personalizado"],
+["Flat","Plano","Plano","Plano"],
+["Strong bass","Graves potentes","Graves potentes","Graves fortes"],
+["Vocals","Voces","Voces","Vozes"],
+["Bright treble","Agudos brillantes","Agudos brillantes","Agudos brilhantes"],
+["Bass (60 Hz)","Graves (60 Hz)","Graves (60 Hz)","Graves (60 Hz)"],
+["Low mids (230 Hz)","Medios graves (230 Hz)","Medios graves (230 Hz)","Médios graves (230 Hz)"],
+["Mids (910 Hz)","Medios (910 Hz)","Medios (910 Hz)","Médios (910 Hz)"],
+["High mids (3.6 kHz)","Medios agudos (3,6 kHz)","Medios agudos (3,6 kHz)","Médios agudos (3,6 kHz)"],
+["Treble (14 kHz)","Agudos (14 kHz)","Agudos (14 kHz)","Agudos (14 kHz)"],
+["Maximum volume","Volumen máximo","Volume máximo","Volume máximo"],
+["Left/right balance","Balance izquierda y derecha","Balance esquerda e dereita","Equilíbrio esquerda e direita"],
+["Mono audio","Audio mono","Audio mono","Áudio mono"],
+["Reset everything","Restablecer todo","Restablecer todo","Repor tudo"],
+["Playlist name","Nombre de la lista","Nome da lista","Nome da lista"],
+["Create playlist","Crear lista","Crear lista","Criar lista"],
+["{n} songs","{n} canciones","{n} cancións","{n} músicas"],
+["Create a playlist and add songs with the + button on each row.","Crea una lista y añade canciones con el botón + de cada fila.","Crea unha lista e engade cancións co botón + de cada fila.","Cria uma lista e adiciona músicas com o botão + de cada linha."],
+["No results for “{q}”.","Sin resultados para “{q}”.","Sen resultados para “{q}”.","Sem resultados para “{q}”."],
+["You have no songs yet. Tap “Add music” and choose MP3, M4A, FLAC or OGG files from your device.","Aún no tienes canciones. Pulsa “Añadir música” y elige archivos MP3, M4A, FLAC u OGG de tu dispositivo.","Aínda non tes cancións. Preme “Engadir música” e escolle ficheiros MP3, M4A, FLAC ou OGG do teu dispositivo.","Ainda não tens músicas. Toca em “Adicionar música” e escolhe ficheiros MP3, M4A, FLAC ou OGG do teu dispositivo."],
+["Mark songs with the heart and they will appear here.","Marca canciones con el corazón y aparecerán aquí.","Marca cancións co corazón e aparecerán aquí.","Marca músicas com o coração e aparecerão aqui."],
+["The queue is empty. Play a song to fill it.","La cola está vacía. Reproduce una canción para llenarla.","A cola está baleira. Reproduce unha canción para enchela.","A fila está vazia. Reproduz uma música para a encher."],
+["This playlist is empty. Add songs with the + button in the library.","Esta lista está vacía. Añade canciones con el botón + de la biblioteca.","Esta lista está baleira. Engade cancións co botón + da biblioteca.","Esta lista está vazia. Adiciona músicas com o botão + da biblioteca."],
+["Like","Me gusta","Gústame","Gosto"],
+["Edit song","Editar canción","Editar canción","Editar música"],
+["Add to a playlist","Añadir a una lista","Engadir a unha lista","Adicionar a uma lista"],
+["Remove from playlist","Quitar de la lista","Quitar da lista","Remover da lista"],
+["Remove from library","Eliminar de la biblioteca","Eliminar da biblioteca","Remover da biblioteca"],
+["Remove","Eliminar","Eliminar","Remover"],
+["Pick a song to start","Elige una canción para empezar","Escolle unha canción para comezar","Escolhe uma música para começar"],
+["Cancel","Cancelar","Cancelar","Cancelar"],
+["Timer off","Temporizador desactivado","Temporizador desactivado","Temporizador desativado"],
+["It will stop when the song ends","Se detendrá al terminar la canción","Deterase ao rematar a canción","Vai parar ao terminar a música"],
+["It will stop in {n} minutes","Se detendrá en {n} minutos","Deterase en {n} minutos","Vai parar em {n} minutos"],
+["Midnight","Medianoche","Medianoite","Meia-noite"],
+["Ocean","Océano","Océano","Oceano"],
+["Forest","Bosque","Bosque","Floresta"],
+["Sunset","Atardecer","Solpor","Pôr do sol"],
+["Paper","Papel","Papel","Papel"],
+["High contrast","Alto contraste","Alto contraste","Alto contraste"],
+["Neon","Neón","Neón","Néon"],
+["Ready-made themes","Temas listos","Temas listos","Temas prontos"],
+["My themes","Mis temas","Os meus temas","Os meus temas"],
+["Share","Compartir","Compartir","Partilhar"],
+["Delete","Eliminar","Eliminar","Eliminar"],
+["You haven't saved any themes yet.","Aún no has guardado ningún tema.","Aínda non gardaches ningún tema.","Ainda não guardaste nenhum tema."],
+["Save the current look as a theme","Guardar el aspecto actual como tema","Gardar o aspecto actual como tema","Guardar o aspeto atual como tema"],
+["Theme name","Nombre del tema","Nome do tema","Nome do tema"],
+["Save","Guardar","Gardar","Guardar"],
+["Code to share","Código para compartir","Código para compartir","Código para partilhar"],
+["Import a theme","Importar un tema","Importar un tema","Importar um tema"],
+["Paste a theme code here (starts with MM1:)","Pega aquí un código de tema (empieza por MM1:)","Pega aquí un código de tema (comeza por MM1:)","Cola aqui um código de tema (começa por MM1:)"],
+["Import","Importar","Importar","Importar"],
+["Advanced editor (CSS)","Editor avanzado (CSS)","Editor avanzado (CSS)","Editor avançado (CSS)"],
+["Write CSS to change anything you want. It applies instantly and is saved with the theme.","Escribe CSS para cambiar lo que quieras. Se aplica al momento y se guarda con el tema.","Escribe CSS para cambiar o que queiras. Aplícase ao momento e gárdase co tema.","Escreve CSS para mudar o que quiseres. Aplica-se de imediato e é guardado com o tema."],
+["Clear the CSS","Borrar el CSS","Borrar o CSS","Apagar o CSS"],
+["Variables and classes available","Variables y clases disponibles","Variables e clases dispoñibles","Variáveis e classes disponíveis"],
+["Variables: --bg (background), --pn (cards), --pn2 (secondary cards), --tx (text), --mu (muted text), --ac (accent), --on (text on the accent), --r (roundness), --cv (cover size), --cr (cover shape), --ff (typeface), --fs (text size), --rp (spacing between songs).","Variables: --bg (fondo), --pn (tarjetas), --pn2 (tarjetas secundarias), --tx (texto), --mu (texto apagado), --ac (acento), --on (texto sobre el acento), --r (redondeo), --cv (tamaño de portada), --cr (forma de portada), --ff (tipografía), --fs (tamaño del texto), --rp (espacio entre canciones).","Variables: --bg (fondo), --pn (tarxetas), --pn2 (tarxetas secundarias), --tx (texto), --mu (texto apagado), --ac (realce), --on (texto sobre o realce), --r (redondeo), --cv (tamaño da cuberta), --cr (forma da cuberta), --ff (tipografía), --fs (tamaño do texto), --rp (espazo entre cancións).","Variáveis: --bg (fundo), --pn (cartões), --pn2 (cartões secundários), --tx (texto), --mu (texto apagado), --ac (destaque), --on (texto sobre o destaque), --r (arredondamento), --cv (tamanho da capa), --cr (forma da capa), --ff (tipo de letra), --fs (tamanho do texto), --rp (espaço entre músicas)."],
+["Classes: .side (sidebar), .main (central area), .bar (player), .head (header), .row (song), .cov (cover), .btn (buttons), .nav (menu), .t (title and artist), .play (play button).","Clases: .side (barra lateral), .main (zona central), .bar (reproductor), .head (cabecera), .row (canción), .cov (portada), .btn (botones), .nav (menú), .t (título y artista), .play (botón de reproducir).","Clases: .side (barra lateral), .main (zona central), .bar (reprodutor), .head (cabeceira), .row (canción), .cov (cuberta), .btn (botóns), .nav (menú), .t (título e artista), .play (botón de reproducir).","Classes: .side (barra lateral), .main (zona central), .bar (reprodutor), .head (cabeçalho), .row (música), .cov (capa), .btn (botões), .nav (menu), .t (título e artista), .play (botão de reproduzir)."],
+["Theme applied","Tema aplicado","Tema aplicado","Tema aplicado"],
+["Code copied","Código copiado","Código copiado","Código copiado"],
+["Name your theme","Ponle un nombre al tema","Ponlle un nome ao tema","Dá um nome ao tema"],
+["Theme saved","Tema guardado","Tema gardado","Tema guardado"],
+["Theme imported","Tema importado","Tema importado","Tema importado"],
+["That code is not valid","Ese código no es válido","Ese código non é válido","Esse código não é válido"],
+["Delete the theme “{n}”?","¿Eliminar el tema “{n}”?","Eliminar o tema “{n}”?","Eliminar o tema “{n}”?"],
+["Delete the playlist “{n}”?","¿Eliminar la lista “{n}”?","Eliminar a lista “{n}”?","Eliminar a lista “{n}”?"],
+["First create a playlist in “Playlists”","Primero crea una lista en “Listas”","Primeiro crea unha lista en “Listas”","Primeiro cria uma lista em “Listas”"],
+["Delete “{n}”?","¿Eliminar “{n}”?","Eliminar “{n}”?","Eliminar “{n}”?"],
+["Name","Nombre","Nome","Nome"],
+["Artist","Artista","Artista","Artista"],
+["Image","Imagen","Imaxe","Imagem"],
+["Choose image","Elegir imagen","Escoller imaxe","Escolher imagem"],
+["Remove image","Quitar","Quitar","Remover"],
+["Song color","Color de la canción","Cor da canción","Cor da música"],
+["Automatic","Automático","Automático","Automático"],
+["Unknown artist","Artista desconocido","Artista descoñecido","Artista desconhecido"],
+];
+const I={es:{},gl:{},pt:{}};TB.forEach(r=>{I.es[r[0]]=r[1];I.gl[r[0]]=r[2];I.pt[r[0]]=r[3]});
+const TR=(k,v)=>{let x=(I[S.ui.lang]&&I[S.ui.lang][k])||k;if(v)for(const q in v)x=x.split('{'+q+'}').join(v[q]);return x};
+const UNK=['Artista desconocido','Unknown artist','Artista desconhecido','Artista descoñecido'];
+const art=s=>UNK.includes(s.artist)?TR('Unknown artist'):s.artist;
+function applyLang(){
+  document.documentElement.lang=S.ui.lang||'en';
+  document.querySelectorAll('[data-t]').forEach(e=>e.textContent=TR(e.dataset.t));
+  document.querySelectorAll('[data-ta]').forEach(e=>e.dataset.ta.split(';').forEach(q=>{const i=q.indexOf(':');e.setAttribute(q.slice(0,i),TR(q.slice(i+1)))}));
 }
 
 /* eventos */
@@ -340,18 +608,21 @@ $('#vol').oninput=e=>{S.vol=+e.target.value;A.volume=S.vol;saveP()};
 $('#srch').oninput=e=>{S.q=e.target.value;render()};
 $('#file').onchange=e=>{add([...e.target.files]);e.target.value=''};
 $('.head label').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('#file').click()}};
-$('#del').onclick=()=>{const p=S.pls.find(p=>p.id===S.view.slice(3));if(p)sheet('¿Eliminar la lista “'+p.name+'”?',[{label:'Eliminar lista',bad:1,fn:()=>{S.pls=S.pls.filter(x=>x!==p);S.view='lists';saveP();render()}}])};
+$('#del').onclick=()=>{const p=S.pls.find(p=>p.id===S.view.slice(3));if(p)sheet(TR('Delete the playlist “{n}”?',{n:p.name}),[{label:TR('Delete playlist'),bad:1,fn:()=>{S.pls=S.pls.filter(x=>x!==p);S.view='lists';saveP();render()}}])};
 $('#np').onclick=e=>{const s=cur();if(s&&e.target.closest('[data-a="likeNow"]'))like(s)};
 $('#list').oninput=e=>{const t=e.target,d=t.dataset||{};
+  if(d.css!==undefined){S.ui.css=t.value;userCss();saveP();return}
   if(d.sl!==undefined){setSleep(t.value);return}
   if(d.eqp!==undefined){const P={flat:[0,0,0,0,0],bass:[6,3,0,0,0],voice:[-2,0,3,3,0],treble:[0,0,0,3,6],rock:[4,2,-2,2,4]}[t.value];if(P){P.forEach((x,i)=>S.ui['e'+i]=x);applyAudio();saveP();render()}return}
   const k=d.ui;if(!k||t.tagName==='BUTTON')return;
   S.ui[k]=t.type==='checkbox'?t.checked:t.type==='range'?+t.value:t.value;
   if(t.type==='range'){const sp=t.parentNode.querySelector('span');if(sp)sp.textContent='('+t.value+(d.un||'')+')'}
-  applyUI();applyAudio();saveP()};
+  applyUI();applyAudio();saveP();if(k==='dyn')dynUpdate();if(k==='lang'){applyLang();render();bar()}};
 document.addEventListener('click',e=>{
   const ub=e.target.closest('button[data-ui]');if(ub){S.ui[ub.dataset.ui]=ub.dataset.val;applyUI();saveP();render();return}
   if(e.target.closest('#rst')){S.ui={...UI0};applyUI();saveP();render();return}
+  const tb=e.target.closest('[data-tab]');if(tb){S.tab=tb.dataset.tab;render();return}
+  const th=e.target.closest('[data-th]');if(th){themeAct(th.dataset.th);return}
   const v=e.target.closest('[data-v]');
   if(v){S.view=v.dataset.v;S.q='';$('#srch').value='';render();return}
   if(e.target.closest('#pc')){const n=$('#pn').value.trim();if(n){S.pls.push({id:uid(),name:n,ids:[]});saveP();render()}return}
@@ -359,9 +630,10 @@ document.addEventListener('click',e=>{
   const i=+r.dataset.i,s=S.shown[i],a=e.target.closest('[data-a]');
   if(!a){if(S.view==='queue'){S.qi=S.order.indexOf(s.id);load()}else play(S.shown,i);return}
   if(a.dataset.a==='like')like(s);
-  else if(a.dataset.a==='add')sheet('Añadir a una lista',S.pls.length?S.pls.map(p=>({label:p.name+(p.ids.includes(s.id)?'  ✓':''),fn:()=>{if(!p.ids.includes(s.id))p.ids.push(s.id);saveP();render()}})):[{label:'Primero crea una lista en “Listas”',fn:()=>{S.view='lists';render()}}]);
+  else if(a.dataset.a==='edit')editSong(s);
+  else if(a.dataset.a==='add')sheet(TR('Add to a playlist'),S.pls.length?S.pls.map(p=>({label:p.name+(p.ids.includes(s.id)?'  ✓':''),fn:()=>{if(!p.ids.includes(s.id))p.ids.push(s.id);saveP();render()}})):[{label:TR('First create a playlist in “Playlists”'),fn:()=>{S.view='lists';render()}}]);
   else if(S.view.startsWith('pl:')){const p=S.pls.find(p=>p.id===S.view.slice(3));p.ids=p.ids.filter(x=>x!==s.id);saveP();render()}
-  else sheet('¿Eliminar “'+s.title+'”?',[{label:'Eliminar de la biblioteca',bad:1,fn:()=>remove(s)}]);
+  else sheet(TR('Delete “{n}”?',{n:s.title}),[{label:TR('Remove from library'),bad:1,fn:()=>remove(s)}]);
 });
 document.addEventListener('keydown',e=>{
   if(/INPUT|TEXTAREA/.test(e.target.tagName)&&e.target.type!=='range')return;

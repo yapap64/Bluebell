@@ -66,13 +66,13 @@ jobs:
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
-      - run: cp android/app/build/outputs/apk/debug/app-debug.apk MiMusica.apk
+      - run: cp android/app/build/outputs/apk/debug/app-debug.apk Bluebell.apk
       - uses: actions/upload-artifact@v4
         with:
           name: android-apk
-          path: MiMusica.apk
+          path: Bluebell.apk
       - name: Adjuntar a la release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: MiMusica.apk
+          files: Bluebell.apk
