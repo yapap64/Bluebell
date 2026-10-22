@@ -23,16 +23,28 @@ jobs:
           cp index.html manifest.webmanifest sw.js icon.svg icon-192.png icon-512.png icon-maskable-512.png apple-touch-icon.png www/
           cp icon-512.png build/icon.png
       - run: npm install
-      - run: npx electron-builder --win --publish never
-      - uses: actions/upload-artifact@v4
-        with:
-          name: windows-exe
-          path: dist/*.exe
-      - name: Adjuntar a la release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: dist/*.exe
+           - name: Crear electron/main.js
+        shell: bash
+        run: |
+          mkdir -p electron
+          cat > electron/main.js <<'EOF'
+          const { app, BrowserWindow, Menu } = require('electron');
+          const path = require('path');
+          app.commandLine.appendSwitch('enable-features', 'HardwareMediaKeyHandling,MediaSessionService');
+          app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+          function crear() {
+            const w = new BrowserWindow({
+              width: 1100, height: 720, minWidth: 380, minHeight: 560,
+              backgroundColor: '#101126', autoHideMenuBar: true,
+              icon: path.join(__dirname, '..', 'www', 'icon-512.png'),
+              webPreferences: { contextIsolation: true }
+            });
+            Menu.setApplicationMenu(null);
+            w.loadFile(path.join(__dirname, '..', 'www', 'index.html'));
+          }
+          app.whenReady().then(crear);
+          app.on('window-all-closed', () => app.quit());
+          EOF
 
   android:
     runs-on: ubuntu-latest
