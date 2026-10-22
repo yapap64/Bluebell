@@ -22,8 +22,7 @@ jobs:
           mkdir www build
           cp index.html manifest.webmanifest sw.js icon.svg icon-192.png icon-512.png icon-maskable-512.png apple-touch-icon.png www/
           cp icon-512.png build/icon.png
-      - run: npm install
-           - name: Crear electron/main.js
+      - name: Crear electron/main.js
         shell: bash
         run: |
           mkdir -p electron
@@ -45,6 +44,17 @@ jobs:
           app.whenReady().then(crear);
           app.on('window-all-closed', () => app.quit());
           EOF
+      - run: npm install
+      - run: npx electron-builder --win --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-exe
+          path: dist/*.exe
+      - name: Adjuntar a la release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.exe
 
   android:
     runs-on: ubuntu-latest
